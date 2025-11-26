@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Репетитор английского языка</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            animation: gradient 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle {
+            color: #555;
+            font-size: 1.3rem;
+            margin-top: 0.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+
+        .card h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .prices {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .price-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: scale(1.08);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            margin-top: 2rem;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .contact-info {
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 2;
+        }
+
+        .contact-info a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #764ba2;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .review {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .review:hover {
+            transform: translateX(10px);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .review-info h4 {
+            margin: 0;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .review-stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+
+        .review-text {
+            color: #555;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .review-delete {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .review-delete:hover {
+            background: #ff3838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌟 English Tutor 🌟</h1>
+        <p class="subtitle">Ваш путь к свободному английскому</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>👋 Обо мне</h2>
+            <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+                <div id="photoContainer" style="flex-shrink: 0;">
+                 <img id="tutorPhoto" src="tutor.jpg" alt="Фото репетитора" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); border: 5px solid white;">
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">
+                        Здравствуйте! Меня зовут Мария, я профессиональный репетитор английского языка с опытом работы более 7 лет. 
+                        Помогу вам достичь ваших целей: сдать экзамены, улучшить разговорные навыки, 
+                        подготовиться к собеседованию или просто полюбить английский язык! 
+                        Занятия проходят в дружелюбной атмосфере с использованием интерактивных лингвистических платформ.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>✨ Мои услуги</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Подготовка к экзаменам</h3>
+                    <p>ЕГЭ, ОГЭ</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💬</div>
+                    <h3>Разговорная практика</h3>
+                    <p>Преодолеем языковой барьер</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📚</div>
+                    <h3>Грамматика</h3>
+                    <p>Закрывваем все школьные пробелы</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💼</div>
+                    <h3>Комплексный подход</h3>
+                    <p>Учимся думать на английском и вплетать его в повседневную жизнь</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>💰 Стоимость занятий</h2>
+            <div class="prices">
+                <div class="price-card">
+                    <h3>Индивидуально</h3>
+                    <div class="price">2500₽</div>
+                    <p>55 минут</p>
+                    <p>📍 Онлайн</p>
+                </div>
+                <div class="price-card">
+                    <h3>В паре</h3>
+                    <div class="price">1750₽</div>
+                    <p>55 минут</p>
+                    <p>👥 Цена за человека</p>
+                </div>
+                <div class="price-card">
+                    <h3>Пробное занятие</h3>
+                    <div class="price">1000₽</div>
+                    <p>30 минут</p>
+                    <p>🎁 Скидка 50%</p>
+                </div>
+                <div class="price-card">
+                    <h3>Абонемент</h3>
+                    <div class="price">18000₽</div>
+                    <p>8 занятий</p>
+                    <p>💎 Выгодно</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>⭐ Отзывы учеников</h2>
+            <div id="reviewsContainer"></div>
+            <div style="text-align: center; margin-top: 2rem; color: #999;" id="noReviews">
+                Пока нет отзывов. Станьте первым!
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📞 Контакты</h2>
+            <div class="contact-info">
+                <p>📱 Телефон: <a href="tel:+79789711825">+7 (978) 971-18-25</a></p>
+                <p>📧 Email: <a href="mailto:Masha.zatsepina02@gmail.com">Masha.zatsepina02@gmail.com</a></p>
+                <p>💬 Telegram: <a href="https://t.me/mar_r_ria" target="_blank">@mar_r_ria</a></p>
+                <p>📍 Занятия онлайн из любой точки мира</p>
+            </div>
+            <center>
+                <a href="https://t.me/mar_r_ria" target="_blank" style="text-decoration: none;">
+                    <button class="contact-btn">
+                        Записаться на занятие
+                    </button>
+                </a>
+            </center>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 English Tutor. Все права защищены.</p>
+        <p>Сделаем английский язык вашим преимуществом! 🚀</p>
+    </footer>
+
+    <!-- Панель редактирования -->
+    <div id="editPanel" style="display: none;">
+        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 9999; overflow-y: auto; padding: 2rem;">
+            <div style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 2rem;">
+                <h2 style="color: #667eea; margin-bottom: 2rem;">Режим редактирования</h2>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Заголовок:</label>
+                    <input type="text" id="editTitle" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Подзаголовок:</label>
+                    <input type="text" id="editSubtitle" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">О себе:</label>
+                    <textarea id="editAbout" rows="5" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;"></textarea>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Телефон:</label>
+                    <input type="text" id="editPhone" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email:</label>
+                    <input type="text" id="editEmail" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Telegram:</label>
+                    <input type="text" id="editTelegram" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Адрес:</label>
+                    <input type="text" id="editAddress" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Фото профиля:</label>
+                    <input type="file" id="editPhoto" accept="image/*" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;">
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Или вставьте ссылку на фото:</p>
+                    <input type="text" id="editPhotoUrl" placeholder="https://example.com/photo.jpg" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;">
+                </div>
+
+                <hr style="margin: 2rem 0; border: none; border-top: 2px solid #eee;">
+
+                <h3 style="color: #667eea; margin-bottom: 1rem;">Добавить отзыв</h3>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Имя:</label>
+                    <input type="text" id="reviewName" placeholder="Имя ученика" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;">
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Оценка:</label>
+                    <select id="reviewRating" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;">
+                        <option value="5">⭐⭐⭐⭐⭐ (5 звёзд)</option>
+                        <option value="4">⭐⭐⭐⭐ (4 звезды)</option>
+                        <option value="3">⭐⭐⭐ (3 звезды)</option>
+                        <option value="2">⭐⭐ (2 звезды)</option>
+                        <option value="1">⭐ (1 звезда)</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Отзыв:</label>
+                    <textarea id="reviewText" rows="4" placeholder="Текст отзыва..." style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem;"></textarea>
+                </div>
+
+                <button onclick="addReview()" style="width: 100%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 1rem; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; margin-bottom: 1.5rem;">
+                    Добавить отзыв
+                </button>
+
+                <hr style="margin: 2rem 0; border: none; border-top: 2px solid #eee;">
+
+                <div style="display: flex; gap: 1rem;">
+                    <button onclick="saveEdits()" style="flex: 1; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer;">
+                        Сохранить изменения
+                    </button>
+                    <button onclick="closeEdit()" style="flex: 1; background: #ddd; color: #333; padding: 1rem; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer;">
+                        Отмена
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка входа в режим редактирования -->
+    <button id="editBtn" onclick="showPasswordPrompt()" style="position: fixed; bottom: 20px; right: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 1rem 1.5rem; border-radius: 50px; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); font-size: 1rem; z-index: 1000;">
+        ✏️ Редактировать
+    </button>
+
+    <script>
+        // УСТАНОВИТЕ ЗДЕСЬ ВАШИ ПАРОЛЬ
+        const ADMIN_PASSWORD = '12345';
+
+        // Хранилище отзывов - ЗДЕСЬ МОЖНО ДОБАВЛЯТЬ/РЕДАКТИРОВАТЬ ОТЗЫВЫ
+        let reviews = [
+    {
+        id: 1,
+        name: "Елена П.",
+        rating: 5,
+        text: "Мария - потрясающий педагог! Моя дочь занимается уже полгода, и прогресс просто невероятный. Раньше она стеснялась говорить по-английски, а теперь с удовольствием смотрит фильмы в оригинале и даже переписывается с друзьями из других стран. Спасибо вам огромное!",
+        role: "мама Вани, 10 лет"
+    },
+    {
+        id: 2,
+        name: "Дмитрий С.",
+        rating: 5,
+        text: "Сын готовился к ЕГЭ с Марией всего 4 месяца и сдал на 94 балла! Занятия интересные, много практики. Мария умеет найти подход и замотивировать.",
+        role: "папа Никиты, 17 лет"
+    },
+    {
+        id: 3,
+        name: "Анна В.",
+        rating: 5,
+        text: "Моему сыну 8 лет, и он просто обожает уроки! Она использует игры, песни, интересные задания — ребёнок даже не замечает, что учится.",
+        role: "мама Тимура, 8 лет"
+    },
+    {
+        id: 4,
+        name: "Ольга М.",
+        rating: 5,
+        text: "Дочка занимается с Марией уже год. Результаты превосходят ожидания — теперь одни пятёрки, участвует в олимпиадах.",
+        role: "мама Ани, 12 лет"
+    },
+    {
+        id: 5,
+        name: "Татьяна Б.",
+        rating: 5,
+        text: "Сын-подросток наконец полюбил английский! Мария нашла к нему подход, учитывала его интересы. Грамматика стала понятной.",
+        role: "мама Ильи, 14 лет"
+    },
+    {
+        id: 6,
+        name: "Ирина К.",
+        rating: 5,
+        text: "Занимаемся онлайн 8 месяцев. Английский был слабым местом — теперь это любимый предмет. Мария объясняет доступно и терпеливо.",
+        role: "мама Даши, 11 лет"
+    }
+];
+        
+        let isEditMode = false;
+
+        // Загрузка отзывов при загрузке страницы
+        window.onload = function() {
+            displayReviews();
+        };
+
+        function showPasswordPrompt() {
+            const password = prompt('Введите пароль для редактирования:');
+            if (password === ADMIN_PASSWORD) {
+                openEditMode();
+            } else if (password !== null) {
+                alert('Неверный пароль!');
+            }
+        }
+
+        function openEditMode() {
+            isEditMode = true;
+            // Загружаем текущие значения в форму
+            document.getElementById('editTitle').value = document.querySelector('h1').textContent.replace('🌟 ', '').replace(' 🌟', '');
+            document.getElementById('editSubtitle').value = document.querySelector('.subtitle').textContent;
+            
+            const aboutText = document.querySelector('.card p').textContent.trim();
+            document.getElementById('editAbout').value = aboutText;
+            
+            const contactInfo = document.querySelectorAll('.contact-info p');
+            document.getElementById('editPhone').value = contactInfo[0].querySelector('a').textContent;
+            document.getElementById('editEmail').value = contactInfo[1].querySelector('a').textContent;
+            document.getElementById('editTelegram').value = contactInfo[2].querySelector('a').textContent;
+            document.getElementById('editAddress').value = contactInfo[3].textContent.replace('📍 ', '');
+
+            document.getElementById('editPanel').style.display = 'block';
+            document.getElementById('editBtn').style.display = 'none';
+            
+            // Показываем кнопки удаления отзывов
+            document.querySelectorAll('.review-delete').forEach(btn => {
+                btn.style.display = 'block';
+            });
+        }
+
+        function closeEdit() {
+            isEditMode = false;
+            document.getElementById('editPanel').style.display = 'none';
+            document.getElementById('editBtn').style.display = 'block';
+            
+            // Скрываем кнопки удаления отзывов
+            document.querySelectorAll('.review-delete').forEach(btn => {
+                btn.style.display = 'none';
+            });
+        }
+
+        function saveEdits() {
+            // Сохраняем изменения
+            const title = document.getElementById('editTitle').value;
+            const subtitle = document.getElementById('editSubtitle').value;
+            const about = document.getElementById('editAbout').value;
+            const phone = document.getElementById('editPhone').value;
+            const email = document.getElementById('editEmail').value;
+            const telegram = document.getElementById('editTelegram').value;
+            const address = document.getElementById('editAddress').value;
+
+            document.querySelector('h1').textContent = `🌟 ${title} 🌟`;
+            document.querySelector('.subtitle').textContent = subtitle;
+            document.querySelector('.card p').textContent = about;
+            
+            const contactInfo = document.querySelectorAll('.contact-info p');
+            contactInfo[0].innerHTML = `📱 Телефон: <a href="tel:${phone.replace(/[^0-9+]/g, '')}">${phone}</a>`;
+            contactInfo[1].innerHTML = `📧 Email: <a href="mailto:${email}">${email}</a>`;
+            contactInfo[2].innerHTML = `💬 Telegram: <a href="#">${telegram}</a>`;
+            contactInfo[3].textContent = `📍 ${address}`;
+
+            // Обработка загрузки фото
+            const photoFile = document.getElementById('editPhoto').files[0];
+            const photoUrl = document.getElementById('editPhotoUrl').value;
+
+            if (photoFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('tutorPhoto').src = e.target.result;
+                };
+                reader.readAsDataURL(photoFile);
+            } else if (photoUrl) {
+                document.getElementById('tutorPhoto').src = photoUrl;
+            }
+
+            alert('Изменения сохранены! ✅');
+            closeEdit();
+        }
+
+        function addReview() {
+            const name = document.getElementById('reviewName').value.trim();
+            const rating = document.getElementById('reviewRating').value;
+            const text = document.getElementById('reviewText').value.trim();
+
+            if (!name || !text) {
+                alert('Пожалуйста, заполните все поля!');
+                return;
+            }
+
+            const review = {
+                id: Date.now(),
+                name: name,
+                rating: parseInt(rating),
+                text: text
+            };
+
+            reviews.push(review);
+            displayReviews();
+
+            // Очищаем поля
+            document.getElementById('reviewName').value = '';
+            document.getElementById('reviewText').value = '';
+            document.getElementById('reviewRating').value = '5';
+
+            alert('Отзыв добавлен! ✅');
+        }
+
+        function deleteReview(id) {
+            if (confirm('Удалить этот отзыв?')) {
+                reviews = reviews.filter(r => r.id !== id);
+                displayReviews();
+            }
+        }
+
+        function displayReviews() {
+            const container = document.getElementById('reviewsContainer');
+            const noReviews = document.getElementById('noReviews');
+
+            if (reviews.length === 0) {
+                container.innerHTML = '';
+                noReviews.style.display = 'block';
+                return;
+            }
+
+            noReviews.style.display = 'none';
+            
+                    role: "мама Даши, 11 лет"
+const reviewsHTML = reviews.map(review => {
+    const stars = '⭐'.repeat(review.rating);
+    const initial = review.name.charAt(0).toUpperCase();
+    return `
+        <div class="review">
+            <div class="review-header">
+                <div class="review-avatar">${initial}</div>
+                <div class="review-info">
+                    <h4>${review.name}</h4>
+                    <div style="font-size: 0.9rem; color: #777; margin-top: 2px;">${review.role}</div>
+                    <div class="review-stars">${stars}</div>
+                </div>
+            </div>
+            <p class="review-text">"${review.text}"</p>
+            <button class="review-delete" onclick="deleteReview(${review.id})" style="display: ${isEditMode ? 'block' : 'none'}">×</button>
+        </div>
+    `;
+}).join('');
+
+            container.innerHTML = reviewsHTML;
+        }
+    </script>
+</body>
+</html>
